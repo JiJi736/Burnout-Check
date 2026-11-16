@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Burnout Check | Work Wellness</title>
+<style>
+  :root {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #172b40;
+    background: #f3f7fb;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  main { max-width: 900px; margin: 32px auto; padding: 0 18px 45px; }
+  
+  .hero {
+    background: linear-gradient(120deg, #173354, #176776);
+    color: white;
+    padding: 38px;
+    border-radius: 24px;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #a8f0e4;
+  }
+  h1 { font-size: 42px; margin: 12px 0 6px; }
+  h2 { margin: 0 0 12px; font-size: 24px; }
+  p { line-height: 1.6; }
+  .hero p { color: #e0edf2; max-width: 650px; }
+  
+  .tag {
+    display: inline-block;
+    border: 1px solid #80bac4;
+    border-radius: 99px;
+    padding: 6px 13px;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .panel {
+    background: white;
+    border: 1px solid #dce6ee;
+    border-radius: 20px;
+    padding: 28px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(18, 52, 86, 0.05);
+  }
+  .muted { color: #586d7d; }
+  .notice {
+    background: #ecf5f4;
+    border-left: 4px solid #147f79;
+    padding: 14px 17px;
+    border-radius: 7px;
+  }
+  .step {
+    color: #16736e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .progress {
+    height: 9px;
+    background: #e1e9f0;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 16px 0 28px;
+  }
+  .progress div {
+    height: 100%;
+    background: #168b86;
+    transition: width 0.2s;
+  }
+  .options { display: grid; gap: 9px; margin-top: 20px; }
+  .option {
+    width: 100%;
+    border: 1px solid #c9d8df;
+    border-radius: 12px;
+    background: #fff;
+    padding: 15px;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    color: #203948;
+  }
+  .option:hover { border-color: #14857f; background: #f2fbfa; }
+  .option.selected { border: 2px solid #087f77; background: #e8f8f4; font-weight: bold; }
+  
+  button { font: inherit; }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    border: none;
+    border-radius: 11px;
+    padding: 13px 19px;
+    background: #156e71;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .btn:disabled { background: #b3c3c9; cursor: not-allowed; }
+  .secondary { background: #eaf1f4; color: #1e4453; }
+  .hidden { display: none !important; }
+  
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+  .metric { border: 1px solid #d9e5e7; border-radius: 14px; padding: 16px; }
+  .metric h3 { font-size: 15px; margin: 0 0 10px; }
+  .meter { height: 10px; background: #e9eff2; border-radius: 20px; overflow: hidden; }
+  .fill { background: #218a89; height: 100%; width: 0; }
+  .level { font-size: 13px; color: #546b75; margin-top: 8px; }
+  
+  .tips { display: grid; gap: 12px; }
+  .tip { padding: 16px; border-radius: 12px; border: 1px solid #dae8ea; background: #fbfefe; }
+  .tip h3 { margin: 0 0 5px; }
+  .tip p { margin: 0; }
+  .foot { font-size: 13px; color: #5d707b; }
+  a { color: #146e75; }
+  ul { line-height: 1.8; }
+
+  @media (max-width: 650px) {
+    .cards { grid-template-columns: 1fr; }
+    .hero { padding: 26px; }
+    .panel { padding: 20px; }
+    h1 { font-size: 32px; }
+  }
+  @media print {
+    body { background: white; }
+    .hero { color: #173354; background: white; border: 1px solid #ccc; }
+    .hero p { color: #173354; }
+    .tag { border-color: #ccc; }
+    .actions, .no-print { display: none !important; }
+    .panel { box-shadow: none; }
+    main { margin: 0; max-width: none; }
+  }
+</style>
+</head>
+
+<body>
+<main>
+
+  <header class="hero">
+    <div class="eyebrow">Student Project · Work Stress</div>
+    <h1>Burnout Check</h1>
+    <p>Spot the signs of work stress early. Take a quick, private self-check and get simple tips for a better workday.</p>
+    <span class="tag">9 questions</span>
+    <span class="tag">3 main areas</span>
+    <span class="tag">100% private</span>
+  </header>
+
+  <section class="panel" id="welcome">
+    <div class="step">Start here</div>
+    <h2>How are you feeling about work?</h2>
+    <p>Think about your work life over the <strong>last 4 weeks</strong>. Pick the option that best matches how often you felt this way.</p>
+    <div class="notice">
+      <strong>Note:</strong> This is a simple self-check tool for class, <strong>not</strong> a medical test. Burnout is a work-related issue, not a medical illness.
+    </div>
+    <p class="muted">Your answers stay right here on this page and are never saved or sent anywhere.</p>
+    <div class="actions">
+      <span></span>
+      <button class="btn" onclick="startQuiz()">Start Check →</button>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="quiz">
+    <div class="step" id="step">Question 1 of 9</div>
+    <div class="progress"><div id="bar" style="width: 0%"></div></div>
+    <h2 id="question"></h2>
+    <p class="muted">In the last 4 weeks, how often did this happen to you?</p>
+    <div class="options" id="options"></div>
+    <div class="actions">
+      <button class="btn secondary" id="back" onclick="prevQuestion()">← Back</button>
+      <button class="btn" id="next" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="results">
+    <div class="step">Your Summary</div>
+    <h2>Your Work Stress Snapshot</h2>
+    <p>These bars show your average score in each area based on your answers. They are just to help you reflect, not to diagnose anything.</p>
+    <div id="metrics" class="cards"></div>
+    <p class="foot">Score guide: 0 = Never, 4 = Very often. Each score is the average of 3 questions.</p>
+    
+    <h2 style="margin-top: 28px">Helpful Next Steps</h2>
+    <div id="tips" class="tips"></div>
+    
+    <div class="notice" style="margin-top: 20px">
+      <strong>Keep in mind:</strong> Fixing burnout isn't just on you. Good managers and healthy workloads make a big difference. If stress is hurting your health, please talk to a doctor or counselor.
+    </div>
+    <div class="actions no-print">
+      <button class="btn secondary" onclick="restartQuiz()">↻ Start Over</button>
+      <button class="btn" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </section>
+
+  <section class="panel" id="about">
+    <h2>About These 3 Areas</h2>
+    <p>Health experts describe work burnout using three main signs: <strong>feeling drained (exhaustion)</strong>, <strong>feeling distant or negative about work</strong>, and <strong>feeling less confident in your skills</strong>. The questions here are simple examples inspired by these three areas.</p>
+    <h3>Helpful Links</h3>
+    <ul>
+      <li><a href="https://www.who.int/standards/classifications/frequently-asked-questions/burn-out-an-occupational-phenomenon" target="_blank">WHO — What is Burnout?</a></li>
+      <li><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-at-work" target="_blank">WHO — Mental Health at Work</a></li>
+    </ul>
+    <p class="foot">Created as a student project for class awareness and discussion.</p>
+  </section>
+
+</main>
+
+<script>
+  
+  var questions = [
+    { cat: 0, text: 'I feel completely drained by the end of my workday.' },
+    { cat: 0, text: 'I wake up feeling tired before work even starts.' },
+    { cat: 0, text: 'Even after a break, I still feel low on energy for work.' },
+    { cat: 1, text: 'I feel disconnected from my job.' },
+    { cat: 1, text: 'I have become more negative about my work.' },
+    { cat: 1, text: 'It is hard to feel interested in my daily tasks.' },
+    { cat: 2, text: 'I doubt my ability to do my job well.' },
+    { cat: 2, text: 'I feel like I am getting less done than I should.' },
+    { cat: 2, text: 'I feel less confident about the value of my work.' }
+  ];
+
+  var categories = ['Low Energy', 'Feeling Distant', 'Low Confidence'];
+  var choices = ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'];
+  var answers = [null, null, null, null, null, null, null, null, null];
+  var currentIndex = 0;
+
+  
+  function showSection(sectionId) {
+    document.getElementById('welcome').classList.add('hidden');
+    document.getElementById('quiz').classList.add('hidden');
+    document.getElementById('results').classList.add('hidden');
+    document.getElementById(sectionId).classList.remove('hidden');
+  }
+
+  function startQuiz() {
+    currentIndex = 0;
+    showSection('quiz');
+    showQuestion();
+  }
+
+  function showQuestion() {
+    var q = questions[currentIndex];
+    document.getElementById('step').textContent = 'Question ' + (currentIndex + 1) + ' of 9 · ' + categories[q.cat];
+    document.getElementById('bar').style.width = ((currentIndex / 9) * 100) + '%';
+    document.getElementById('question').textContent = q.text;
+
+    var buttonsHtml = '';
+    for (var i = 0; i < choices.length; i++) {
+      var selectedClass = (answers[currentIndex] === i) ? 'selected' : '';
+      buttonsHtml += '<button class="option ' + selectedClass + '" onclick="selectAnswer(' + i + ')">' + choices[i] + '</button>';
+    }
+    document.getElementById('options').innerHTML = buttonsHtml;
+
+    document.getElementById('next').disabled = (answers[currentIndex] === null);
+    document.getElementById('next').textContent = (currentIndex === 8) ? 'See Results →' : 'Next →';
+    document.getElementById('back').disabled = (currentIndex === 0);
+  }
+
+  function selectAnswer(choiceIndex) {
+    answers[currentIndex] = choiceIndex;
+    showQuestion();
+  }
+
+  function prevQuestion() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      showQuestion();
+    }
+  }
+
+  function nextQuestion() {
+    if (answers[currentIndex] === null) return;
+    if (currentIndex < 8) {
+      currentIndex++;
+      showQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    showSection('results');
+
+    
+    var totals = [0, 0, 0];
+    for (var i = 0; i < questions.length; i++) {
+      var categoryIndex = questions[i].cat;
+      totals[categoryIndex] += answers[i];
+    }
+
+    var averages = [totals[0] / 3, totals[1] / 3, totals[2] / 3];
+
+    
+    var metricsHtml = '';
+    for (var j = 0; j < categories.length; j++) {
+      var percent = (averages[j] / 4) * 100;
+      metricsHtml += '<div class="metric">' +
+        '<h3>' + categories[j] + '</h3>' +
+        '<div class="meter"><div class="fill" style="width:' + percent + '%"></div></div>' +
+        '<div class="level">Average score: ' + averages[j].toFixed(1) + ' / 4</div>' +
+      '</div>';
+    }
+    document.getElementById('metrics').innerHTML = metricsHtml;
+
+    
+    var adviceList = [
+      {
+        title: 'Energy & Workload',
+        high: 'You often feel drained. Try talking to your manager about your workload and make sure you take real breaks.',
+        low: 'Pay attention to what drains your energy. Regular breaks and clear work hours help keep your battery full.'
+      },
+      {
+        title: 'Staying Connected',
+        high: 'You often feel distant from your work. Try to pinpoint what is frustrating you and ask for support or new tasks.',
+        low: 'Keep checking in with yourself. Good teamwork and having a say in your tasks help keep work meaningful.'
+      },
+      {
+        title: 'Confidence at Work',
+        high: 'You often doubt your work. Ask for clearer goals, helpful feedback, and the right tools to do your job.',
+        low: 'Celebrate your wins, big or small, and ask for clear priorities whenever expectations feel blurry.'
+      }
+    ];
+
+    var tipsHtml = '';
+    for (var k = 0; k < adviceList.length; k++) {
+      var text = (averages[k] >= 2.5) ? adviceList[k].high : adviceList[k].low;
+      tipsHtml += '<div class="tip"><h3>' + adviceList[k].title + '</h3><p>' + text + '</p></div>';
+    }
+    tipsHtml += '<div class="tip"><h3>How to start a conversation</h3><p>Try saying: "I want to do my best work, but I am feeling stretched thin lately. Can we look at my priorities together?"</p></div>';
+    
+    document.getElementById('tips').innerHTML = tipsHtml;
+  }
+
+  function restartQuiz() {
+    for (var i = 0; i < answers.length; i++) {
+      answers[i] = null;
+    }
+    currentIndex = 0;
+    showSection('welcome');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
